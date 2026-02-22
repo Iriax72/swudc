@@ -2,4 +2,5 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SWUDC</title>
+    <link rel="stylesheet" src="../style.css">
 </head>

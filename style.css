@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+#btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 5px;
+}
+
+.menu-btn {
+    margin: 5px;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+}
+
+.menu-btn p {
+    color: black;
+    font-size: 3rem;
+    font-family: Cambria, Cochin;
+}
