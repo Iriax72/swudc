@@ -5,8 +5,8 @@
     ?>
     <body>
         <?php
-        // Routage simple depuis le paramètre GET `page`.
-        $allowed = [
+        // Routage depuis le paramètre GET `page`.
+        $pages = [
             'menu' => './pages/menu.php',
             'yours' => './pages/yours.php',
             'new' => './pages/new.php',
@@ -14,12 +14,15 @@
             'settings' => './pages/settings.php',
         ];
 
-        $page = isset($_GET['page']) ? basename($_GET['page']) : 'menu';
-        if (!array_key_exists($page, $allowed)) {
+        $page = isset($_GET['page']) ?
+        basename($_GET['page']) :
+        'menu';
+
+        if (!array_key_exists($page, $pages)) {
             $page = 'menu';
         }
 
-        require $allowed[$page];
+        require $pages[$page];
         ?>
     </body>
 </html>
