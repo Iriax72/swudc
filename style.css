@@ -157,6 +157,8 @@ h1 {
 }
 
 .choiceWindow {
+    width: 93vw;
+    height: 93vh;
     position: fixed;
     top: 50%;
     left: 50%;
