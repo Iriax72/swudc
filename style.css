@@ -97,9 +97,11 @@ h1 {
     margin: 0;
     padding: 15px;
     display: grid;
-    grid-template-areas: 
-    le ba
-    de de;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "le ba"
+        "de de";
     gap: 15px;
 }
 
