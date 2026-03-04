@@ -1,5 +1,5 @@
 <?php
-function (string $page):null {
+function (string $page):void {
     $btn = <<<HTML
     <div class="back-btn-container">
         <a href="{$page}" class="back-btn-a">
