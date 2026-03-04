@@ -114,13 +114,14 @@ h1 {
 #newdeck-base-container {
     grid-area: de;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    grid-template-columns: repeat(auto-fit, 60px);
     gap: 10px;
     width: 100%;              /* prevent horizontal scroll */
     max-width: 100%;
     overflow-y: auto;         /* allow vertical scrolling when content is tall */
     overflow-x: hidden;       /* never scroll horizontally */
     padding: 5px;
+    align-items: center;
 }
 
 .card-btn {
@@ -145,7 +146,7 @@ h1 {
 }
 
 .card-btn img {
-    width: 8px;          /* just a few pixels wide */
+    width: 16px;          /* just a few pixels wide */
     height: auto;
     display: block;
 }
