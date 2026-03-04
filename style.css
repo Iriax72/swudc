@@ -132,3 +132,9 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+
+.card-btn img {
+    width: 8px;          /* just a few pixels wide */
+    height: auto;
+    display: block;
+}
