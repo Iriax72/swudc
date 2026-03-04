@@ -91,3 +91,44 @@ h1 {
     transform: translateY(-3px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+#newdeck-container {
+    margin: 0;
+    padding: 15px;
+    display: grid;
+    grid-template-areas: 
+    le ba
+    de de;
+    gap: 15px;
+}
+
+.leader {
+    grid-area: le;
+}
+
+.base {
+    grid-area: ba;
+}
+
+#newdeck-base-container {
+    grid-area: de;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 10px;
+    width: 100%;              /* prevent horizontal scroll */
+    max-width: 100%;
+    overflow-y: auto;         /* allow vertical scrolling when content is tall */
+    overflow-x: hidden;       /* never scroll horizontally */
+    padding: 5px;
+}
+
+.card-btn {
+    height: 50px;
+    width: 30px;
+    background-color: #303030;
+    border: 3px solid orange;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
