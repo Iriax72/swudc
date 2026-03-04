@@ -1,5 +1,6 @@
 <?php
-require('./elements/backBtn.php');
+require_once('./elements/backBtn.php');
+backBtn('./index.php?page=menu');
 ?>
 <h1>Nouveau Deck</h1>
 <div id="newdeck-container">
