@@ -170,12 +170,13 @@ h1 {
     border: 5px solid orange;
     border-radius: 10px;
 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 60px);
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
     overflow-y: auto;
     overflow-x: hidden;
-    align-items: center;
+    align-items: flex-start;
     padding: 5px;
 }
 
