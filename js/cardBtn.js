@@ -2,53 +2,67 @@
 const cards = [];
 
 const urls = [];
-for(i = 1; i <= 252; i++) {
+for(let i = 1; i <= 252; i++) {
     urls.push(`./assets/images/cards/${i}.png`);
 }
 
-let index = 0;
-function loadNext() {
-    if (index >= urls.length) return;
+/*
+ * Préchargement asynchrone des images. `cardsLoaded` est une promesse
+ * que l'on peut attendre si nécessaire, mais l'appel ci‑dessous ne
+ * bloque pas l'exécution du reste du script.
+ */
+let cardsLoaded = preloadCards();
 
-    const img = new Image();
-    img.src = urls[index];
+function preloadCards() {
+    return new Promise(resolve => {
+        let index = 0;
 
-    img.onload = () => {
-        cards.push(img);
-        index++;
+        function loadNext() {
+            if (index >= urls.length) {
+                resolve();
+                return;
+            }
+
+            const img = new Image();
+            img.src = urls[index];
+
+            img.onload = () => {
+                cards.push(img);
+                index++;
+                loadNext();
+            };
+
+            img.onerror = () => {
+                img.src = './assets/images/cardError.png';
+                cards.push(img);
+                index++;
+                loadNext();
+            };
+        }
+
         loadNext();
-    };
-
-    img.onerror = () => {
-        img.src = './assets/images/cardError.png';
-        cards.push(img);
-        index++;
-        loadNext()
-    }
+    });
 }
-loadNext();
-// les images sont maintenant chargées
+// les images sont maintenant en cours de chargement en tâche de fond
+
 
 const cardsBtn = [...document.querySelectorAll(".card-btn")];
 
-const choiceWindow = '<div class="choiceWindow"></div>'
-
-const cardImages = {x: 'pomme', y: 'pomme'}
-
 cardsBtn.forEach(btn => {
     btn.addEventListener('click', () => {
-        openChoice(btn)
+        openChoice(btn);
     })
 });
 
 let div = null;
-function openChoice(card) {
+function openChoice(cardBtn) {
     div = document.createElement("div");
     div.className = "choiceWindow";
     document.body.appendChild(div);
     cards.forEach(card => {
         const btn = document.createElement("button");
-        btn.className = "cardBtn";
+        btn.className = "cardImageBtn";
+        btn.appendChild(card.cloneNode());
         div.appendChild(btn);
     });
 }

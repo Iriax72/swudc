@@ -179,11 +179,11 @@ h1 {
     padding: 5px;
 }
 
-.cardBtn {
+.cardImageBtn {
     padding: 0;
 }
 
-.cardBtn img {
+.cardImageBtn img {
     display: block;
     width: 60px;
     height: auto;
