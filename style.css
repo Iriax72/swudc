@@ -186,6 +186,6 @@ h1 {
 
 .cardImageBtn img {
     display: block;
-    width: 25vh;
+    width: 100px;
     height: auto;
 }
