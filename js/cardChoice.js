@@ -42,10 +42,7 @@ function preloadCards() {
         loadNext();
     });
 }
-// les images sont maintenant en cours de chargement en tâche de fond
-
-
-const mainCardButtons = [...document.querySelectorAll(".card-btn")];
+// les images sont maintenant en cours de chargement en tâche de fondp
 
 let div = null;
 let choiceCardButtons = [];
@@ -57,14 +54,18 @@ function openChoice(cardBtn) {
     div.className = "choiceWindow";
     document.body.appendChild(div);
     choiceCardButtons = [];
-    cards.forEach(card => {
-        const choiceCardBtn = document.createElement("button");
-        choiceCardBtn.className = "cardImageBtn";
-        choiceCardBtn.appendChild(card.cloneNode());
-        div.appendChild(choiceCardBtn);
-        choiceCardButtons.push(choiceCardBtn);
-        choiceCardBtn.addEventListener('click', () => {
-            closeWindow(choiceCardBtn);
+    
+    return new Promise(resolve => {
+        resolveChoicePromise = resolve;
+        cards.forEach(card => {
+            const choiceCardBtn = document.createElement("button");
+            choiceCardBtn.className = "cardImageBtn";
+            choiceCardBtn.appendChild(card.cloneNode());
+            div.appendChild(choiceCardBtn);
+            choiceCardButtons.push(choiceCardBtn);
+            choiceCardBtn.addEventListener('click', () => {
+                closeWindow(choiceCardBtn);
+            });
         });
     });
 }
@@ -77,14 +78,14 @@ function closeWindow(choiceCardBtn) {
     // Fermer la fenêtre
     div.remove();
     
+    // Résoudre la promesse avec le bouton sélectionné
+    if (resolveChoicePromise) {
+        resolveChoicePromise(choiceCardBtn);
+    }
+    
     // Réinitialiser les variables
     div = null;
     choiceCardButtons = [];
     selectedMainCardBtn = null;
+    resolveChoicePromise = null;
 }
-
-mainCardButtons.forEach(mainCardBtn => {
-    mainCardBtn.addEventListener('click', () => {
-        openChoice(mainCardBtn);
-    })
-});
