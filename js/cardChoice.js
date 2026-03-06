@@ -55,19 +55,22 @@ function openChoice(cardBtn) {
     document.body.appendChild(div);
     choiceCardButtons = [];
     
-    return new Promise(resolve => {
+    const choicePromise = new Promise(resolve => {
         resolveChoicePromise = resolve;
-        cards.forEach(card => {
-            const choiceCardBtn = document.createElement("button");
-            choiceCardBtn.className = "cardImageBtn";
-            choiceCardBtn.appendChild(card.cloneNode());
-            div.appendChild(choiceCardBtn);
-            choiceCardButtons.push(choiceCardBtn);
-            choiceCardBtn.addEventListener('click', () => {
-                closeWindow(choiceCardBtn);
-            });
+    });
+    
+    cards.forEach(card => {
+        const choiceCardBtn = document.createElement("button");
+        choiceCardBtn.className = "cardImageBtn";
+        choiceCardBtn.appendChild(card.cloneNode());
+        div.appendChild(choiceCardBtn);
+        choiceCardButtons.push(choiceCardBtn);
+        choiceCardBtn.addEventListener('click', () => {
+            closeWindow(choiceCardBtn);
         });
     });
+    
+    return choicePromise;
 }
 
 function closeWindow(choiceCardBtn) {
