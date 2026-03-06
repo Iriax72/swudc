@@ -1,16 +1,15 @@
-// charger les images:
-const cards = [];
-
-const urls = [];
-for(let i = 1; i <= 252; i++) {
-    urls.push(`./assets/images/cards/${i}.png`);
-}
-
 /*
  * Préchargement asynchrone des images. `cardsLoaded` est une promesse
  * que l'on peut attendre si nécessaire, mais l'appel ci‑dessous ne
  * bloque pas l'exécution du reste du script.
  */
+const cards = [];
+
+const urls = [];
+for (let i = 1; i <= 252; i++) {
+    urls.push(`./assets/images/cards/${i}.png`);
+}
+
 let cardsLoaded = preloadCards();
 
 function preloadCards() {
@@ -46,23 +45,46 @@ function preloadCards() {
 // les images sont maintenant en cours de chargement en tâche de fond
 
 
-const cardsBtn = [...document.querySelectorAll(".card-btn")];
-
-cardsBtn.forEach(btn => {
-    btn.addEventListener('click', () => {
-        openChoice(btn);
-    })
-});
+const mainCardButtons = [...document.querySelectorAll(".card-btn")];
 
 let div = null;
+let choiceCardButtons = [];
+let selectedMainCardBtn = null;
+
 function openChoice(cardBtn) {
+    selectedMainCardBtn = cardBtn;
     div = document.createElement("div");
     div.className = "choiceWindow";
     document.body.appendChild(div);
+    choiceCardButtons = [];
     cards.forEach(card => {
-        const btn = document.createElement("button");
-        btn.className = "cardImageBtn";
-        btn.appendChild(card.cloneNode());
-        div.appendChild(btn);
+        const choiceCardBtn = document.createElement("button");
+        choiceCardBtn.className = "cardImageBtn";
+        choiceCardBtn.appendChild(card.cloneNode());
+        div.appendChild(choiceCardBtn);
+        choiceCardButtons.push(choiceCardBtn);
+        choiceCardBtn.addEventListener('click', () => {
+            closeWindow(choiceCardBtn);
+        });
     });
 }
+
+function closeWindow(choiceCardBtn) {
+    // Ajouter l'image du bouton sélectionné au bouton selectedMainCardBtn
+    const selectedImage = choiceCardBtn.querySelector('img').cloneNode();
+    selectedMainCardBtn.appendChild(selectedImage);
+    
+    // Fermer la fenêtre
+    div.remove();
+    
+    // Réinitialiser les variables
+    div = null;
+    choiceCardButtons = [];
+    selectedMainCardBtn = null;
+}
+
+mainCardButtons.forEach(mainCardBtn => {
+    mainCardBtn.addEventListener('click', () => {
+        openChoice(mainCardBtn);
+    })
+});
