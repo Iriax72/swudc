@@ -1,4 +1,4 @@
-import {openChoice} from './js/cardChoice.js';
+import {openChoice} from './cardChoice.js';
 
 const cardButtons = [...document.querySelectorAll(".card-btn")];
 
